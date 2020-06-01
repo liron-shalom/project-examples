@@ -10,8 +10,20 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'Ecosys Artifactory'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "liron",
+            "target": "lirin"
+          }
+        ]
+      }
+    failNoOp: true
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
